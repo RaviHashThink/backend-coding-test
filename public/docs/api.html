@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div>
+        <h1>API Documentation</h1>
+        <i>Author: Ravi Teja</i>
+    </div>
+    <hr>
+
+    <h2>Rides</h2>
+    <p><b>Ride - </b> Get ride information</p>
+    <div style="margin: 10px">
+        <p><b>API</b></p>
+        <b style="background: green; padding: 8px; border-radius:5px; color:white">
+            GET
+        </b>
+        <div style="background: black; padding: 15px; border-radius:5px; margin-top:15px">
+            <code style="color:white">/rides/:id</code>
+        </div>
+        <br>
+        <p><b>Parameters</b></p>
+        <table style="border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;padding:10px">Field</th>
+                    <th style="border: 1px solid black;padding:10px">Type</th>
+                    <th style="border: 1px solid black;padding:10px">Description</th>
+                    <th style="border: 1px solid black;padding:10px">Mandatory</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">id</td>
+                    <td style="border: 1px solid black;padding:10px">Number</td>
+                    <td style="border: 1px solid black;padding:10px">Rides unqiue id</td>
+                    <td style="border: 1px solid black;padding:10px">Yes</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <p><b>Response: Success 200 OK</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>[
+    {
+        "rideID": 1,
+        "startLat": 1.22334,
+        "startLong": 2.33434,
+        "endLat": 4.8877,
+        "endLong": 8.00999,
+        "riderName": "ravi",
+        "driverName": "teja",
+        "driverVehicle": "polo",
+        "created": "2019-08-06 13:21:16"
+    }
+]</code></pre>
+        </div>
+        <br>
+        <p><b>Response: ERROR</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>{
+    error_code: 'SERVER_ERROR',
+    message: 'Unknown error'
+}</code></pre>
+        </div>
+        <br>
+        <table style="border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;padding:10px">Code</th>
+                    <th style="border: 1px solid black;padding:10px">Message</th>
+                    <th style="border: 1px solid black;padding:10px">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">SERVER_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Unknown error</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Server error when trying to fetch the
+                        ride information</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">RIDES_NOT_FOUND_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Could not find any rides</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Ride information is not exist for the
+                        given id </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    <p><b>Rides - </b> Get all rides information</p>
+    <div style="margin: 10px">
+        <p><b>API</b></p>
+        <b style="background: green; padding: 8px; border-radius:5px; color:white">
+            GET
+        </b>
+        <div style="background: black; padding: 15px; border-radius:5px; margin-top:15px">
+            <code style="color:white">/rides?limit=10&page=1&sort=created&order=asc&fetch_total_count=true</code>
+        </div>
+        <br>
+        <p><b>Parameters</b></p>
+        <table style="border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;padding:10px">Field</th>
+                    <th style="border: 1px solid black;padding:10px">Type</th>
+                    <th style="border: 1px solid black;padding:10px">Description</th>
+                    <th style="border: 1px solid black;padding:10px">Mandatory</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">limit</td>
+                    <td style="border: 1px solid black;padding:10px">Number</td>
+                    <td style="border: 1px solid black;padding:10px">No of records per page. Default all</td>
+                    <td style="border: 1px solid black;padding:10px">Optional</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">page</td>
+                    <td style="border: 1px solid black;padding:10px">Number</td>
+                    <td style="border: 1px solid black;padding:10px">Pagination page number</td>
+                    <td style="border: 1px solid black;padding:10px">Optional</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">sort</td>
+                    <td style="border: 1px solid black;padding:10px">String</td>
+                    <td style="border: 1px solid black;padding:10px">Name of field to be sort. Default "created"</td>
+                    <td style="border: 1px solid black;padding:10px">Optional</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">order</td>
+                    <td style="border: 1px solid black;padding:10px">String</td>
+                    <td style="border: 1px solid black;padding:10px">Sorting order (asc / desc). Default "asc"</td>
+                    <td style="border: 1px solid black;padding:10px">Optional</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">fetch_total_count</td>
+                    <td style="border: 1px solid black;padding:10px">Number</td>
+                    <td style="border: 1px solid black;padding:10px">To get the count of total number of records</td>
+                    <td style="border: 1px solid black;padding:10px">Optional</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <p><b>Response: Success 200 OK</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>{
+      totalCount: 20,
+      records : [
+          {
+              "rideID": 1,
+              "startLat": 1.22334,
+              "startLong": 2.33434,
+              "endLat": 4.8877,
+              "endLong": 8.00999,
+              "riderName": "ravi",
+              "driverName": "teja",
+              "driverVehicle": "polo",
+              "created": "2019-08-06 13:21:16"
+          }
+      ]
+}</code></pre>
+        </div>
+        <br>
+        <p><b>Response: ERROR</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>{
+    error_code: 'SERVER_ERROR',
+    message: 'Unknown error'
+}</code></pre>
+        </div>
+        <br>
+        <table style="border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;padding:10px">Code</th>
+                    <th style="border: 1px solid black;padding:10px">Message</th>
+                    <th style="border: 1px solid black;padding:10px">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">SERVER_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Unknown error</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Server error when trying to fetch the
+                        rides information</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">RIDES_NOT_FOUND_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Could not find any rides</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">No rides information available</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    <p><b>Ride - </b> Create new ride information</p>
+    <div style="margin: 10px">
+        <p><b>API</b></p>
+        <b style="background: green; padding: 8px; border-radius:5px; color:white">
+            POST
+        </b>
+        <div style="background: black; padding: 15px; border-radius:5px; margin-top:15px">
+            <code style="color:white">/rides</code>
+        </div>
+        <br>
+        <p><b>Body</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>
+  {
+	"start_lat" : 1.22334,
+	"start_long" : 2.33434,
+	"end_lat" : 4.8877,
+	"end_long" : 8.00999,
+	"rider_name" : "ravi",
+	"driver_name" : "chinna",
+	"driver_vehicle" : "polo"
+}
+  </code></pre>
+        </div>
+        <br>
+        <p><b>Response: Success 200 OK</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>[
+    {
+        "rideID": 1,
+        "startLat": 1.22334,
+        "startLong": 2.33434,
+        "endLat": 4.8877,
+        "endLong": 8.00999,
+        "riderName": "ravi",
+        "driverName": "teja",
+        "driverVehicle": "polo",
+        "created": "2019-08-06 13:21:16"
+    }
+]</code></pre>
+        </div>
+        <br>
+        <p><b>Response: ERROR</b></p>
+        <div style="background: black; border-radius:5px; margin-top:15px;color:white;padding:10px">
+            <pre><code>{
+    error_code: 'SERVER_ERROR',
+    message: 'Unknown error'
+}</code></pre>
+        </div>
+        <br>
+        <table style="border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;padding:10px">Code</th>
+                    <th style="border: 1px solid black;padding:10px">Message</th>
+                    <th style="border: 1px solid black;padding:10px">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">SERVER_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Unknown error</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Server error when trying to fetch the
+                        rides information</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">VALIDATION_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Start latitude and longitude must be between -90 -
+                        90 and -180 to 180 degrees respectively</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Invalid start latitube or start
+                        longitude values</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">VALIDATION_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">End latitude and longitude must be between -90 - 90
+                        and -180 to 180 degrees respectively</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Invalid end latitube or end longitude
+                        values</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">VALIDATION_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Rider name must be a non empty string</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Invalid rider name</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">VALIDATION_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Driver name must be a non empty string
+                    </td>
+                    <td style="border: 1px solid black;padding:10px">Invalid driver name</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;padding:10px">VALIDATION_ERROR</td>
+                    <td style="border: 1px solid black;padding:10px">Driver vehicle name must be a non empty string</td>
+                    <td style="border: 1px solid black;padding:10px; color: grey">Invalid driver vehicle name</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+
+    <hr>
+
+</body>
+
+</html>

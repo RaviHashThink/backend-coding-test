@@ -9,6 +9,8 @@ const jsonParser = bodyParser.json();
 module.exports = (db) => {
     app.get('/health', (req, res) => res.send('Healthy'));
 
+    app.use('/docs', express.static(__dirname + '/../public/docs'));
+
     app.post('/rides', jsonParser, (req, res) => {
         const startLatitude = Number(req.body.start_lat);
         const startLongitude = Number(req.body.start_long);
@@ -42,14 +44,14 @@ module.exports = (db) => {
         if (typeof driverName !== 'string' || driverName.length < 1) {
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'Rider name must be a non empty string'
+                message: 'Driver name must be a non empty string'
             });
         }
 
         if (typeof driverVehicle !== 'string' || driverVehicle.length < 1) {
             return res.send({
                 error_code: 'VALIDATION_ERROR',
-                message: 'Rider name must be a non empty string'
+                message: 'Driver vehicle name must be a non empty string'
             });
         }
 
