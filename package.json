@@ -7,14 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "lint": "eslint ./src/",
-    "test": "nyc mocha tests",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "test": "mocha tests",
     "start": "node index.js"
   },
-  "pre-push": [
-    "test"
-  ],
   "keywords": [
     "Xendit"
   ],
@@ -26,11 +21,7 @@
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1",
-    "pre-push": "^0.1.1",
-    "supertest": "^4.0.2",
-    "winston": "^3.2.1"
+    "supertest": "^4.0.2"
   }
 }
