@@ -97,7 +97,6 @@ module.exports = (db) => {
             query += ' OFFSET ' + (Number(req.query.page - 1) * Number(req.query.limit))
         }
 
-        console.log(query)
         db.all(query, function (err, rows) {
             if (err) {
                 return res.send({
