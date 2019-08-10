@@ -79,7 +79,26 @@ module.exports = (db) => {
     });
 
     app.get('/rides', (req, res) => {
-        db.all('SELECT * FROM Rides', function (err, rows) {
+        var query = 'SELECT * FROM Rides';
+        if (req.query.sort) {
+            query += ' ORDER BY ' + req.query.sort
+        } else {
+            query += ' ORDER BY created'
+        }
+        if (req.query.order && req.query.order == 'desc') {
+            query += ' desc'
+        } else {
+            query += ' asc'
+        }
+        if (req.query.limit) {
+            query += ' LIMIT ' + Number(req.query.limit)
+        }
+        if (req.query.page && req.query.limit) {
+            query += ' OFFSET ' + (Number(req.query.page - 1) * Number(req.query.limit))
+        }
+
+        console.log(query)
+        db.all(query, function (err, rows) {
             if (err) {
                 return res.send({
                     error_code: 'SERVER_ERROR',
@@ -93,8 +112,25 @@ module.exports = (db) => {
                     message: 'Could not find any rides'
                 });
             }
+            if (req.query.fetch_total_count && req.query.fetch_total_count == 'true') {
+                db.get('SELECT count(*) AS totalCount FROM Rides', [], function (err, res1) {
+                    if (err) {
+                        return res.send({
+                            error_code: 'SERVER_ERROR',
+                            message: 'Unknown error'
+                        });
+                    }
+                    res.send({
+                        totalCount: res1.totalCount,
+                        records: rows
+                    });
+                });
+            } else {
+                res.send({
+                    records: rows
+                });
+            }
 
-            res.send(rows);
         });
     });
 

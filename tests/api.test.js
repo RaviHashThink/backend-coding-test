@@ -251,10 +251,35 @@ describe('API tests', () => {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .then(function (res) {
-                    if (res.body.length == 1) {
+                    if (res.body.records.length == 1) {
+                        done();
+                    }
+                });
+        })
+
+        it('should get a list of rides and totalcount for pagination parameters', (done) => {
+            request(app).get('/rides?sort=startLat&limit=5&order=desc&page=1&fetch_total_count=true')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .then(function (res) {
+                    if (res.body.records.length == 1 && res.body.totalCount == 1) {
+                        done();
+                    }
+                });
+        })
+
+        it('should only get a list of rides for pagination parameters', (done) => {
+            request(app).get('/rides?sort=startLat&limit=5&order=desc&page=1&fetch_total_count=false')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .then(function (res) {
+                    if (res.body.records.length == 1 && res.body.totalCount == undefined) {
                         done();
                     }
                 });
         })
     })
+
 });
