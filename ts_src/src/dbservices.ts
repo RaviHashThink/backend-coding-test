@@ -32,7 +32,7 @@ export class DBServices {
     }
 
     getRecord(id: number, callback: any) {
-        return this.db.all('SELECT * FROM Rides WHERE rideID = ?', id, callback);
+        return this.db.all(`SELECT * FROM Rides WHERE rideID = \'${id}\'`, [], callback);
     }
 
     getAllRecords(callback: any) {
