@@ -14,7 +14,8 @@
     "start": "node index.js",
     "ts_start": "node dist/index.js",
     "ts_dev": "nodemon ts_src/index.ts",
-    "ts_build": "tsc -p ."
+    "ts_build": "tsc -p .",
+    "artillery": "artillery run artillery_config.yml"
   },
   "pre-push": [
     "test"
@@ -33,6 +34,7 @@
     "@types/express": "^4.17.0",
     "@types/node": "^12.7.1",
     "@types/sqlite3": "^3.1.5",
+    "artillery": "^1.6.0-28",
     "eslint": "^6.1.0",
     "mocha": "^6.1.4",
     "nodemon": "^1.19.1",
